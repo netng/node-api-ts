@@ -12,6 +12,11 @@ app.use(cors()) // enable cors
 app.use(helmet()) // enable helmet
 app.use(morgan('dev')) // enable morgan
 
+// Define express routes
+app.get('/', (req, res) => {
+    res.send('Hello express!')
+})
+
 // Start express server
 app.listen(port, () => {
     // Callback function when server is successfully started
