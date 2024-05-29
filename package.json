@@ -1,0 +1,25 @@
+{
+  "name": "node-api-ts",
+  "version": "1.0.0",
+  "description": "ExpressJS API with TypeScript",
+  "main": "build/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/netng/node-api-ts.git"
+  },
+  "keywords": [
+    "node.js",
+    "express",
+    "api",
+    "typescript"
+  ],
+  "author": "Nandang Sopyan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/netng/node-api-ts/issues"
+  },
+  "homepage": "https://github.com/netng/node-api-ts#readme"
+}
