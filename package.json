@@ -4,7 +4,9 @@
   "description": "ExpressJS API with TypeScript",
   "main": "build/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc -p .",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
