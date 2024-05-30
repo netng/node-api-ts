@@ -13,6 +13,8 @@ app.use(cors()) // enable cors
 app.use(helmet()) // enable helmet
 app.use(morgan('dev')) // enable morgan
 
+app.use(express.json()) // enable JSON body parser
+
 // Define express routes
 app.use('/', router)
 
