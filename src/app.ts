@@ -3,15 +3,20 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 import router from './routes'
+import dotenv from 'dotenv'
+
+// Initialize dotenv configuration
+dotenv.config()
 
 // Create express server
 const app = express() // This is new express instance
-const port = 3000 // express http port
+const port = process.env['APP_PORT'] || 3000 // express http port
+const env = process.env['APP_ENV'] || 'dev' // application environment
 
 // Express config
 app.use(cors()) // enable cors
 app.use(helmet()) // enable helmet
-app.use(morgan('dev')) // enable morgan
+app.use(morgan(env)) // enable morgan
 
 app.use(express.json()) // enable JSON body parser
 
