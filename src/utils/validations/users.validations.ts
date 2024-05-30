@@ -4,55 +4,40 @@ import {
     NextFunction
 } from 'express'
 
+import Joi, {
+    ValidationError,
+    ValidationResult
+} from 'joi'
+
+export const userSchema = Joi.object({
+    id: Joi.number().integer().required(),
+    name: Joi.string().required(),
+    email: Joi.string().email().required(),
+    password: Joi.string().required().min(8)
+})
+
 export const validateUser = (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
-
-    // Get data from request body
-    const {
-        id,
-        name,
-        email,
-        password
-    } = req.body
-
-    // Create an array to store errors
-    const errors = []
-
-    // Validate data
-    if (!id) {
-        errors.push('id is required')
-    }
-
-    if (!name) {
-        errors.push('name is required')
-    }
-
-    if (!email) {
-        errors.push('email is required')
-    }
-
-    if (!password) {
-        errors.push('password is required')
-    } else {
-        if (password.length < 8) {
-            errors.push('password must be at least 8 chars long')
-        }
-    }
-
-    // If there are errors
-    // return 422 (Unprocessable Entity)
-    if (errors.length) {
+    // Validate user data
+    const result: ValidationResult =
+        userSchema.validate(
+            req.body,
+            { abortEarly: false } // Return all error, if its set to true will stop validation on first error
+        )
+    
+    // If errors, return error response
+    if (result.error) {
         return res.status(422).json(
             {
-                message: 'validation failed',
-                errors
+                message: 'invalid request data',
+                errors: result.error.details.map((err) => err.message)
             }
         )
     }
 
-    // Pass user data to the next middleware
+    // If no errors, continue to the next handler
     next()
 }
